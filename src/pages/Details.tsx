@@ -22,7 +22,7 @@ export function Details() {
 
   return (
     <>
-      <main className="max-w-[1280px] min-h-screen mx-auto my-0 text-white px-2">
+      <main className="max-w-[1280px] h-full mx-auto my-0 text-white px-2">
         <Link className="font-bold font-Poppins px-2" to="/">
           <p className="inline-block text-2xl mt-7 mb-10 text-[#E1E1E6]">
             Voltar
