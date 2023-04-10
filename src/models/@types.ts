@@ -13,3 +13,14 @@ interface DishIngredientsProps {
   dish_id: number;
   ingre_name: string;
 }
+
+export interface UserProps {
+  user: {
+    id: number;
+    name: string;
+    email: string;
+    password: string;
+    is_admin: number;
+  };
+  token: string;
+}

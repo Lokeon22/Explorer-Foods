@@ -1,3 +1,4 @@
+import { useUser } from "../../context/useUser";
 import close from "../../assets/icons/close.svg";
 import searchicon from "../../assets/icons/search.svg";
 
@@ -6,6 +7,8 @@ interface MenuMobileProps {
 }
 
 export function MenuMobile({ setMenu }: MenuMobileProps) {
+  const { handleLogout } = useUser();
+
   function handleCloseModal() {
     setMenu(false);
   }
@@ -24,7 +27,12 @@ export function MenuMobile({ setMenu }: MenuMobileProps) {
           type="text"
         />
       </div>
-      <h2 className="text-2xl font-light font-Poppins text-[#E1E1E6] ">Sair</h2>
+      <h2
+        onClick={handleLogout}
+        className="text-2xl font-light font-Poppins text-[#E1E1E6]"
+      >
+        Sair
+      </h2>
     </nav>
   );
 }

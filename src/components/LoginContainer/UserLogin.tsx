@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useUser } from "../../context/useUser";
 import { Link } from "react-router-dom";
 import { Title } from "../Title";
 import { Label } from "../Label";
@@ -5,15 +7,27 @@ import { Input } from "../Input";
 import { Button } from "../Button";
 
 export function UserLogin() {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const { handleLogin } = useUser();
+
   return (
     <>
       <Title text="Faça login" />
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleLogin(email, password);
+        }}
+      >
         <Label id="email" text="Email" />
         <Input
           id="email"
           type="email"
           placeholder="Exemplo: exemplo@exemplo.com.br"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           name="email"
           border="small"
         />
@@ -22,6 +36,8 @@ export function UserLogin() {
           id="password"
           type="password"
           placeholder="No mínimo 6 caracteres"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           name="password"
           border="small"
         />

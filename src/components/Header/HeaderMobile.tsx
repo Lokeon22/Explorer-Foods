@@ -1,11 +1,16 @@
 import { useState } from "react";
 
 import { MenuMobile } from "./MenuMobile";
+import exploreradmin from "../../assets/icons/explorer_admin.svg";
 import explorer from "../../assets/icons/explorer.svg";
 import menuIcon from "../../assets/icons/menu.svg";
 import receipt from "../../assets/icons/receipt.svg";
 
-export function HeaderMobile() {
+interface HeaderMobileProps {
+  is_admin?: number;
+}
+
+export function HeaderMobile({ is_admin }: HeaderMobileProps) {
   const [menu, setMenu] = useState<boolean>(false);
 
   function handleOpenModal() {
@@ -20,7 +25,10 @@ export function HeaderMobile() {
         ) : (
           <>
             <img src={menuIcon} onClick={handleOpenModal} />
-            <img src={explorer} className="w-52" />
+            <img
+              src={!!is_admin ? exploreradmin : explorer}
+              className="w-52 h-full"
+            />
             <img src={receipt} />
           </>
         )}
