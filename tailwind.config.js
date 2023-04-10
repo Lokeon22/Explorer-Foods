@@ -10,7 +10,13 @@ export default {
         Poppins: ["'Poppins', sans-serif"],
         Roboto: ["'Roboto', sans-serif"],
       },
+      backgroundImage: {
+        "card-gradient": "linear-gradient(180deg, #091E26 0%, #00131C 100%);",
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require("tailwind-scrollbar-hide"),
+    require("tailwind-scrollbar")({ nocompatible: true }),
+  ],
 };
