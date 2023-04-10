@@ -11,7 +11,9 @@ export const Header = () => {
     <header className="w-full h-full lg:h-28 bg-[#00111A] text-white">
       <section className="max-w-[1400px] h-12 hidden lg:grid grid-cols-4 mx-auto my-0 py-7 px-2 gap-2">
         <div className="flex items-center justify-center col-span-1">
-          <img className="w-full md:w-52" src={explorer} />
+          <Link to={"/"}>
+            <img className="w-full md:w-52" src={explorer} />
+          </Link>
         </div>
         <div className="relative flex items-center col-span-2">
           <img

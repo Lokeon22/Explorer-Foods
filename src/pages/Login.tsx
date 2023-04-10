@@ -10,7 +10,7 @@ export function Login() {
     <LoginRegister>
       <Routes>
         <Route path="" element={<UserLogin />} />
-        <Route path="register" element={<UserRegister />} />
+        <Route path="/register" element={<UserRegister />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </LoginRegister>

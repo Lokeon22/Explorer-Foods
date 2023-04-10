@@ -6,7 +6,7 @@ export interface DishProps {
   image: string;
   category: string;
   created_at: string;
-  ingredients: DishIngredientsProps[];
+  allIngre: DishIngredientsProps[];
 }
 
 interface DishIngredientsProps {

@@ -1,7 +1,11 @@
 import minus from "../../assets/icons/Minus.svg";
 import plus from "../../assets/icons/Plus.svg";
 
-export function ButtonDishes() {
+interface ButtonDishesProps {
+  price?: string;
+}
+
+export function ButtonDishes({ price }: ButtonDishesProps) {
   return (
     <form className="w-full flex flex-col sm:flex-row sm:flex-wrap justify-center items-center gap-4">
       <div className="flex items-center gap-3">
@@ -22,7 +26,7 @@ export function ButtonDishes() {
         type="submit"
         className="bg-[#750310] px-4 py-2 rounded font-Poppins hover:bg-[#7c000d] hover:duration-300 w-4/5 sm:w-auto"
       >
-        incluir
+        incluir {price && `R$ ${price}`}
       </button>
     </form>
   );
