@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 import { MenuMobile } from "./MenuMobile";
 import exploreradmin from "../../assets/icons/explorer_admin.svg";
 import explorer from "../../assets/icons/explorer.svg";
@@ -25,10 +25,12 @@ export function HeaderMobile({ is_admin }: HeaderMobileProps) {
         ) : (
           <>
             <img src={menuIcon} onClick={handleOpenModal} />
-            <img
-              src={!!is_admin ? exploreradmin : explorer}
-              className="w-52 h-full"
-            />
+            <Link to={"/"}>
+              <img
+                src={!!is_admin ? exploreradmin : explorer}
+                className="w-52 h-full"
+              />
+            </Link>
             <img src={receipt} />
           </>
         )}

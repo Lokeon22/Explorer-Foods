@@ -1,13 +1,23 @@
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { api } from "../../services/api";
+
 import { Label } from "../Label";
 import { IngredientsItem } from "../IngredientsItem";
 import upload from "../../assets/icons/upload.svg";
 
 export function AdminModifyDish() {
+  const [name, setName] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [price, setPrice] = useState<string>("");
+  const [image, setImage] = useState<File | null>(null);
   const [category, setCategory] = useState<string>("Refeição");
 
   const [ingreName, setIngreName] = useState<string[]>([]);
   const [newIngre, setNewIngre] = useState<string>("");
+
+  const navigate = useNavigate();
 
   function handleIngredients() {
     if (newIngre.length === 0) {
@@ -23,10 +33,40 @@ export function AdminModifyDish() {
     setIngreName(ingreNameFiltered);
   }
 
+  const { mutate, isError } = useMutation(
+    ["adminCreateDish"],
+    async () => {
+      if (image) {
+        const dishForm = new FormData();
+        dishForm.append("name", name);
+        dishForm.append("description", description);
+        dishForm.append("price", price);
+        dishForm.append("image", image, image.name);
+        dishForm.append("category", category);
+        dishForm.append("ingre_name", JSON.stringify(ingreName));
+        const response = await api.patch("/createdish", dishForm);
+        return response.data;
+      }
+    },
+    {
+      onSuccess: () => {
+        alert("Prato adicionado");
+        navigate("/");
+      },
+    }
+  );
+
+  if (isError) {
+    return (
+      <h2>Não foi possível adicionar o prato, por favor tente mais tarde</h2>
+    );
+  }
+
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
+        mutate();
       }}
     >
       <section className="w-full h-full flex flex-col md:flex-row items-center gap-8">
@@ -39,6 +79,10 @@ export function AdminModifyDish() {
           <input
             type="file"
             className="absolute w-56 h-12 top-10 cursor-pointer opacity-0"
+            required
+            onChange={(e) => {
+              e.target.files && setImage(e.target.files[0]);
+            }}
           />
         </div>
         <div className="w-full md:w-2/5 flex flex-col justify-center gap-4">
@@ -46,6 +90,8 @@ export function AdminModifyDish() {
           <input
             id="name"
             type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             placeholder="Ex: Salada Ceasar"
             className="outline-none px-[14px] py-3 rounded-lg placeholder:text-[#7C7C8A] font-Roboto bg-[#0D161B]"
             required
@@ -98,6 +144,8 @@ export function AdminModifyDish() {
             id="price"
             type="text"
             placeholder="R$ 00,00"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
             className="outline-none px-[14px] py-3 rounded-lg placeholder:text-[#7C7C8A] font-Roboto bg-[#0D161B]"
             required
           />
@@ -109,6 +157,8 @@ export function AdminModifyDish() {
           id="description"
           className="w-full h-40 py-3 px-4 outline-none resize-none mt-4 rounded-lg bg-[#0D161B] placeholder:text-[#7C7C8A]"
           placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
         <button
           type="submit"
