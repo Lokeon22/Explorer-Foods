@@ -30,7 +30,7 @@ export function MenuMobile({ setMenu }: MenuMobileProps) {
         />
       </div>
       {!!user?.user.is_admin && (
-        <Link to={"/new"}>
+        <Link to={"/createdish"}>
           <h2 className="text-2xl font-light font-Poppins text-[#E1E1E6] mb-2">
             Novo prato
           </h2>
