@@ -5,8 +5,8 @@ import explorer from "../../assets/icons/explorer.svg";
 import exploreradmin from "../../assets/icons/explorer_admin.svg";
 import logout from "../../assets/icons/SignOut.svg";
 import searchicon from "../../assets/icons/search.svg";
-import receipt from "../../assets/icons/receipt.svg";
 import { HeaderMobile } from "./HeaderMobile";
+import { AdminButton } from "../AdminContent/AdminButton";
 
 export const Header = () => {
   const { handleLogout, user } = useUser();
@@ -25,7 +25,7 @@ export const Header = () => {
         <div className="relative flex items-center col-span-2">
           <img
             src={searchicon}
-            className="absolute w-6 h-6 top-[18px] left-16"
+            className="absolute w-6 h-6 top-[14px] left-16"
           />
           <input
             className="w-full h-12 px-28 py-3 bg-[#0D1D25] outline-none rounded"
@@ -34,13 +34,11 @@ export const Header = () => {
           />
         </div>
         <div className="flex items-center justify-center gap-8 col-span-1">
-          <button className="relative w-52 h-14 px-8 py-3 rounded bg-[#750310] text-white">
-            Pedidos (0)
-            <img
-              src={receipt}
-              className="md:w-8 md:h-8 w-6 h-6 absolute md:top-3 md:left-5 top-1.5 left-1"
-            />
-          </button>
+          {!!user?.user.is_admin ? (
+            <AdminButton icon="false" text="Novo prato" url="createdish" />
+          ) : (
+            <AdminButton icon="true" text="Pedidos (0)" url="pedidos" />
+          )}
           <Link onClick={handleLogout} to={"/"}>
             <img className="w-8 h-8" src={logout} />
           </Link>

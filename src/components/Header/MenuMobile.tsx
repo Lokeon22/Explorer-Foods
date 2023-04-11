@@ -1,4 +1,6 @@
 import { useUser } from "../../context/useUser";
+import { Link } from "react-router-dom";
+
 import close from "../../assets/icons/close.svg";
 import searchicon from "../../assets/icons/search.svg";
 
@@ -7,7 +9,7 @@ interface MenuMobileProps {
 }
 
 export function MenuMobile({ setMenu }: MenuMobileProps) {
-  const { handleLogout } = useUser();
+  const { handleLogout, user } = useUser();
 
   function handleCloseModal() {
     setMenu(false);
@@ -27,12 +29,18 @@ export function MenuMobile({ setMenu }: MenuMobileProps) {
           type="text"
         />
       </div>
-      <h2
-        onClick={handleLogout}
-        className="text-2xl font-light font-Poppins text-[#E1E1E6]"
-      >
-        Sair
-      </h2>
+      {!!user?.user.is_admin && (
+        <Link to={"/new"}>
+          <h2 className="text-2xl font-light font-Poppins text-[#E1E1E6] mb-2">
+            Novo prato
+          </h2>
+        </Link>
+      )}
+      <Link to={"/"} onClick={handleLogout}>
+        <h2 className="text-2xl font-light font-Poppins text-[#E1E1E6]">
+          Sair
+        </h2>
+      </Link>
     </nav>
   );
 }

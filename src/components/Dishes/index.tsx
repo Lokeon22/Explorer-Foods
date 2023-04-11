@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { api } from "../../services/api";
+import { useUser } from "../../context/useUser";
 
 import { ButtonDishes } from "../ButtonDishes";
 import heart from "../../assets/icons/HeartStraight.svg";
+import pencil from "../../assets/icons/Pencil.svg";
 
 interface DishesProps {
   id: number;
@@ -13,9 +15,14 @@ interface DishesProps {
 }
 
 export function Dishes({ id, name, desc, price, image }: DishesProps) {
+  const { user } = useUser();
+
   return (
     <>
-      <img src={heart} className="w-8 h-8 cursor-pointer self-end" />
+      <img
+        src={!!user?.user.is_admin ? pencil : heart}
+        className="w-6 h-6 cursor-pointer self-end"
+      />
       <Link to={`/details/${id}`}>
         <img
           src={`${api.defaults.baseURL}/files/${image}`}

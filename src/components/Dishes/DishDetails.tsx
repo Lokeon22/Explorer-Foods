@@ -1,13 +1,17 @@
+import { useUser } from "../../context/useUser";
 import { api } from "../../services/api";
 import { DishProps } from "../../models/@types";
 
 import { ButtonDetails } from "../ButtonDishes/ButtonDetails";
+import { AdminButton } from "../AdminContent/AdminButton";
 
 interface DishDetailProps {
   dish: DishProps;
 }
 
 export function DishDetail({ dish }: DishDetailProps) {
+  const { user } = useUser();
+
   return (
     <div className="flex flex-col md:flex-row items-center gap-6 md:gap-5 lg:gap-12">
       <img
@@ -30,7 +34,11 @@ export function DishDetail({ dish }: DishDetailProps) {
             );
           })}
         </ul>
-        <ButtonDetails price={dish.price} />
+        {!!user?.user.is_admin ? (
+          <AdminButton icon="false" text="Editar prato" />
+        ) : (
+          <ButtonDetails price={dish.price} />
+        )}
       </div>
     </div>
   );
