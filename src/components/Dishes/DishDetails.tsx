@@ -35,7 +35,11 @@ export function DishDetail({ dish }: DishDetailProps) {
           })}
         </ul>
         {!!user?.user.is_admin ? (
-          <AdminButton icon="false" text="Editar prato" />
+          <AdminButton
+            icon="false"
+            text="Editar prato"
+            url={`editdish/${dish.id}`}
+          />
         ) : (
           <ButtonDetails price={dish.price} />
         )}
