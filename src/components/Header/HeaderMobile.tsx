@@ -31,7 +31,9 @@ export function HeaderMobile({ is_admin }: HeaderMobileProps) {
                 className="w-52 h-full"
               />
             </Link>
-            <img src={receipt} />
+            <Link to={"/payment"}>
+              <img src={receipt} />
+            </Link>
           </>
         )}
       </section>

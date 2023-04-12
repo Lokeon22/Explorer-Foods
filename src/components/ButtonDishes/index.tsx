@@ -1,20 +1,41 @@
+import { useState } from "react";
 import minus from "../../assets/icons/Minus.svg";
 import plus from "../../assets/icons/Plus.svg";
 
 export function ButtonDishes() {
+  const [amount, setAmount] = useState<number>(1);
+
   return (
-    <form className="w-full flex flex-col sm:flex-row sm:flex-wrap justify-center items-center gap-4">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+      className="w-full flex flex-col sm:flex-row sm:flex-wrap justify-center items-center gap-4"
+    >
       <div className="flex items-center gap-3">
-        <button type="button">
+        <button
+          type="button"
+          onClick={() => {
+            if (amount <= 1) {
+              return;
+            }
+            setAmount(amount - 1);
+          }}
+        >
           <img src={minus} className="w-6 h-6" />
         </button>
         <button
           className="font-Roboto font-semibold text-lg bg-transparent"
           onClick={(e) => e.preventDefault()}
         >
-          1
+          {amount}
         </button>
-        <button type="button">
+        <button
+          type="button"
+          onClick={() => {
+            setAmount(amount + 1);
+          }}
+        >
           <img src={plus} className="w-6 h-6" />
         </button>
       </div>

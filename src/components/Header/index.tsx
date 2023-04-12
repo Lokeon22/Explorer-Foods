@@ -33,11 +33,11 @@ export const Header = () => {
             type="text"
           />
         </div>
-        <div className="flex items-center justify-center gap-8 col-span-1">
+        <div className="flex items-center justify-center gap-2 xl:gap-8 col-span-1">
           {!!user?.user.is_admin ? (
             <AdminButton icon="false" text="Novo prato" url="createdish" />
           ) : (
-            <AdminButton icon="true" text="Pedidos (0)" url="pedidos" />
+            <AdminButton icon="true" text="Pedidos (0)" url="payment" />
           )}
           <Link onClick={handleLogout} to={"/"}>
             <img className="w-8 h-8" src={logout} />

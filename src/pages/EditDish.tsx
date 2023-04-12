@@ -32,13 +32,13 @@ export function EditDish() {
 
       await api.patch(`/dishphoto/${data?.id}`, updateDishPhoto);
     }
-    /**/
+
     const response = await api.put(`/editdish/${data?.id}`, {
-      name: name ?? data?.name,
-      description: description ?? data?.description,
-      price: price ?? data?.price,
+      name,
+      description,
+      price,
       image: image ?? data?.image,
-      category: category ?? data?.category,
+      category,
       ingre_name: ingreName ?? data?.allIngre,
     });
     return response.data;
@@ -47,6 +47,18 @@ export function EditDish() {
   const { mutate, isError } = useMutation(["updateDish"], updateDish, {
     onSuccess: () => {
       alert("Prato atualizazdo");
+      navigate("/");
+    },
+  });
+
+  async function deleteDish() {
+    const res = await api.delete(`/remove/${id}`);
+    return res.data;
+  }
+
+  const { mutate: delDish } = useMutation(["deleteDish"], deleteDish, {
+    onSuccess: () => {
+      alert("Prato deletado");
       navigate("/");
     },
   });
@@ -60,7 +72,12 @@ export function EditDish() {
       <Back />
       <section className="w-full mx-auto my-0 px-3 py-3 xl:px-0 xl:py-0 font-Poppins font-medium">
         <h2 className="text-3xl mb-8">Editar prato</h2>
-        <AdminModifyDish mutate={mutate} isError={isError} />
+        <AdminModifyDish
+          mutate={mutate}
+          isError={isError}
+          editar={true}
+          delDish={delDish}
+        />
       </section>
     </main>
   );

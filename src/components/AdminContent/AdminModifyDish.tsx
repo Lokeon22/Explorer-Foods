@@ -7,11 +7,18 @@ import { IngredientsItem } from "../IngredientsItem";
 import upload from "../../assets/icons/upload.svg";
 
 interface ModifyDishProps {
-  mutate?: UseMutateFunction<any, unknown, CreateDishProps, unknown>;
+  mutate: UseMutateFunction<any, unknown, CreateDishProps, unknown>;
   isError: boolean;
+  delDish?: UseMutateFunction<any, unknown, void, unknown>;
+  editar?: boolean;
 }
 
-export function AdminModifyDish({ mutate, isError }: ModifyDishProps) {
+export function AdminModifyDish({
+  mutate,
+  isError,
+  editar,
+  delDish,
+}: ModifyDishProps) {
   const [name, setName] = useState<string>();
   const [description, setDescription] = useState<string>();
   const [price, setPrice] = useState<string>();
@@ -138,12 +145,25 @@ export function AdminModifyDish({ mutate, isError }: ModifyDishProps) {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <button
-          type="submit"
-          className="w-full md:w-52 h-12 text-center text-sm font-medium bg-[#AB4D55] rounded self-auto md:self-end mt-8"
-        >
-          Salvar alterações
-        </button>
+        <div className="flex sm:gap-8 gap-4 self-auto md:self-end">
+          <button
+            style={{ display: editar ? "block" : "none" }}
+            type="submit"
+            className="w-full md:w-32 h-12 text-center text-sm font-medium bg-[#0D161B] rounded mt-8"
+            onClick={(e) => {
+              e.preventDefault();
+              if (delDish) delDish();
+            }}
+          >
+            Excluir prato
+          </button>
+          <button
+            type="submit"
+            className="w-full md:w-52 h-12 text-center text-sm font-medium bg-[#AB4D55] rounded mt-8"
+          >
+            Salvar alterações
+          </button>
+        </div>
       </div>
     </form>
   );

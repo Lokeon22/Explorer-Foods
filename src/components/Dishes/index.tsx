@@ -19,10 +19,13 @@ export function Dishes({ id, name, desc, price, image }: DishesProps) {
 
   return (
     <>
-      <img
-        src={!!user?.user.is_admin ? pencil : heart}
-        className="w-6 h-6 cursor-pointer self-end"
-      />
+      {!!user?.user.is_admin ? (
+        <Link className="self-end" to={`/editdish/${id}`}>
+          <img src={pencil} className="w-6 h-6 cursor-pointer" />
+        </Link>
+      ) : (
+        <img src={heart} className="w-7 h-7 cursor-pointer self-end" />
+      )}
       <Link to={`/details/${id}`}>
         <img
           src={`${api.defaults.baseURL}/files/${image}`}
@@ -38,7 +41,7 @@ export function Dishes({ id, name, desc, price, image }: DishesProps) {
       <span className="text-[#82F3FF] text-xl sm:text-3xl font-Roboto mt-1 mb-3 sm:mt-4 sm:mb-4">
         R$ {price}
       </span>
-      <ButtonDishes />
+      {user?.user.is_admin === 0 && <ButtonDishes />}
     </>
   );
 }
