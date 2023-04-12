@@ -39,13 +39,7 @@ export function DishesCategory({ category }: DishCategory) {
               key={dish.id}
               className="sm:w-[300px] w-[250px] flex flex-none py-2 px-2 sm:py-14 sm:px-6 flex-col items-center"
             >
-              <Dishes
-                id={dish.id}
-                name={dish.name}
-                desc={dish.description}
-                price={dish.price}
-                image={dish.image}
-              />
+              <Dishes data={dish} />
             </div>
           ))}
       </div>

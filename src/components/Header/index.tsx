@@ -9,7 +9,7 @@ import { HeaderMobile } from "./HeaderMobile";
 import { AdminButton } from "../AdminContent/AdminButton";
 
 export const Header = () => {
-  const { handleLogout, user } = useUser();
+  const { handleLogout, user, pedidos } = useUser();
 
   return (
     <header className="w-full h-full lg:h-28 bg-[#00111A] text-white">
@@ -37,7 +37,11 @@ export const Header = () => {
           {!!user?.user.is_admin ? (
             <AdminButton icon="false" text="Novo prato" url="createdish" />
           ) : (
-            <AdminButton icon="true" text="Pedidos (0)" url="payment" />
+            <AdminButton
+              icon="true"
+              text={`Pedidos (${pedidos.length})`}
+              url="payment"
+            />
           )}
           <Link onClick={handleLogout} to={"/"}>
             <img className="w-8 h-8" src={logout} />

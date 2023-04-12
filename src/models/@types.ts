@@ -24,3 +24,9 @@ export interface UserProps {
   };
   token: string;
 }
+
+export interface PedidosProps {
+  id: number;
+  name: string;
+  price: string;
+}

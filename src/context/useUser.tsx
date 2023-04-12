@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { api } from "../services/api";
-import { UserProps } from "../models/@types";
+import { UserProps, PedidosProps } from "../models/@types";
 
 interface UserProviderProps {
   children: React.ReactNode;
@@ -11,12 +11,15 @@ interface UserContextProps {
   setUser: React.Dispatch<React.SetStateAction<UserProps | undefined>>;
   handleLogin: (email: string, password: string) => void;
   handleLogout: () => void;
+  pedidos: PedidosProps[];
+  setPedidos: React.Dispatch<React.SetStateAction<PedidosProps[]>>;
 }
 
 const UserContext = createContext({} as UserContextProps);
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<UserProps | undefined>();
+  const [pedidos, setPedidos] = useState<PedidosProps[]>([]);
 
   async function handleLogin(email: string, password: string) {
     await api
@@ -55,7 +58,9 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser, handleLogin, handleLogout }}>
+    <UserContext.Provider
+      value={{ user, setUser, handleLogin, handleLogout, pedidos, setPedidos }}
+    >
       {children}
     </UserContext.Provider>
   );
