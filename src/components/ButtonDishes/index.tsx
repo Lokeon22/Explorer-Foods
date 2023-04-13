@@ -12,10 +12,13 @@ interface ButtonDishesProps {
     id: number;
     name: string;
     price: string;
+    image: string;
   };
+
+  dishPrice?: string;
 }
 
-export function ButtonDishes({ data }: ButtonDishesProps) {
+export function ButtonDishes({ data, dishPrice }: ButtonDishesProps) {
   const { pedidos, setPedidos } = useUser();
   const botao = useRef<HTMLButtonElement>(null);
 
@@ -52,7 +55,8 @@ export function ButtonDishes({ data }: ButtonDishesProps) {
         adicionarCarrinho(botao);
         notify();
       }}
-      className="w-full flex flex-col sm:flex-row sm:flex-wrap justify-center items-center gap-4"
+      className="w-full flex flex-col sm:flex-row sm:flex-wrap items-center gap-4"
+      style={{ justifyContent: dishPrice ? "start" : "center" }}
     >
       <div className="flex items-center gap-3">
         <button
@@ -78,7 +82,7 @@ export function ButtonDishes({ data }: ButtonDishesProps) {
         type="submit"
         className="bg-[#750310] px-4 py-2 rounded font-Poppins hover:bg-[#7c000d] hover:duration-300 w-4/5 sm:w-auto"
       >
-        incluir
+        incluir {dishPrice && `R$ ${dishPrice}`}
       </button>
       <Toastify />
     </form>

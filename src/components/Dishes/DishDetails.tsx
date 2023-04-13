@@ -2,7 +2,7 @@ import { useUser } from "../../context/useUser";
 import { api } from "../../services/api";
 import { DishProps } from "../../models/@types";
 
-import { ButtonDetails } from "../ButtonDishes/ButtonDetails";
+import { ButtonDishes } from "../ButtonDishes";
 import { AdminButton } from "../AdminContent/AdminButton";
 
 interface DishDetailProps {
@@ -41,7 +41,7 @@ export function DishDetail({ dish }: DishDetailProps) {
             url={`editdish/${dish.id}`}
           />
         ) : (
-          <ButtonDetails price={dish.price} />
+          <ButtonDishes data={dish} dishPrice={dish.price} />
         )}
       </div>
     </div>
