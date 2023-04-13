@@ -7,15 +7,21 @@ import { AdminButton } from "../AdminContent/AdminButton";
 
 interface DishDetailProps {
   dish: DishProps;
+  margin?: boolean;
+  imageSize: "small" | "large";
 }
 
-export function DishDetail({ dish }: DishDetailProps) {
+export function DishDetail({ dish, margin, imageSize }: DishDetailProps) {
   const { user } = useUser();
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-6 md:gap-5 lg:gap-12">
+    <div
+      className="flex flex-col md:flex-row items-center gap-6 md:gap-5 lg:gap-12"
+      style={{ marginBottom: margin ? "50px" : "0px" }}
+    >
       <img
-        className="w-96 h-full"
+        className="h-full"
+        style={{ width: imageSize === "small" ? "300px" : "384px" }}
         src={`${api.defaults.baseURL}/files/${dish.image}`}
         alt={dish.name}
       />

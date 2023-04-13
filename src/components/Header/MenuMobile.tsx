@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useUser } from "../../context/useUser";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import close from "../../assets/icons/close.svg";
 import searchicon from "../../assets/icons/search.svg";
@@ -11,8 +12,18 @@ interface MenuMobileProps {
 export function MenuMobile({ setMenu }: MenuMobileProps) {
   const { handleLogout, user } = useUser();
 
+  const [search, setSearch] = useState<string>("");
+  const navigate = useNavigate();
+
   function handleCloseModal() {
     setMenu(false);
+  }
+
+  function navigateOnSearchMobile() {
+    if (search.length <= 0) {
+      return;
+    }
+    navigate(`/search/${search}`);
   }
 
   return (
@@ -22,11 +33,17 @@ export function MenuMobile({ setMenu }: MenuMobileProps) {
         <h2 className="text-xl">Menu</h2>
       </div>
       <div className="relative flex items-center mb-6">
-        <img src={searchicon} className="absolute w-6 h-6 left-2 top-3.5" />
+        <img
+          src={searchicon}
+          className="absolute w-6 h-6 left-2 top-3.5"
+          onClick={navigateOnSearchMobile}
+        />
         <input
-          className="w-full h-12 px-10 py-3 bg-[#0D1D25] outline-none rounded"
+          className="w-full h-12 px-11 py-3 bg-[#0D1D25] outline-none rounded"
           placeholder="Busque por pratos ou ingredientes"
           type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
       {!!user?.user.is_admin && (

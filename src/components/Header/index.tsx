@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/useUser";
 import { Link } from "react-router-dom";
 
@@ -10,6 +12,15 @@ import { AdminButton } from "../AdminContent/AdminButton";
 
 export const Header = () => {
   const { handleLogout, user, pedidos } = useUser();
+  const [search, setSearch] = useState<string>("");
+  const navigate = useNavigate();
+
+  function navigateOnSearch() {
+    if (search.length <= 0) {
+      return;
+    }
+    navigate(`/search/${search}`);
+  }
 
   return (
     <header className="w-full h-full lg:h-28 bg-[#00111A] text-white">
@@ -25,12 +36,15 @@ export const Header = () => {
         <div className="relative flex items-center col-span-2">
           <img
             src={searchicon}
-            className="absolute w-6 h-6 top-[14px] left-16"
+            className="absolute w-6 h-6 top-[14px] left-16 cursor-pointer"
+            onClick={navigateOnSearch}
           />
           <input
             className="w-full h-12 px-28 py-3 bg-[#0D1D25] outline-none rounded"
             placeholder="Busque por pratos ou ingredientes"
             type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
         <div className="flex items-center justify-center gap-2 xl:gap-8 col-span-1">
