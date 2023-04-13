@@ -31,3 +31,11 @@ export interface PedidosProps {
   price: string;
   image: string;
 }
+
+export interface FavoritesProps {
+  id: number;
+  name: string;
+  description: string;
+  price: string;
+  image: string;
+}

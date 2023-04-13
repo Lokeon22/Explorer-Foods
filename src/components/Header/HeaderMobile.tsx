@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useUser } from "../../context/useUser";
 import { Link } from "react-router-dom";
 import { MenuMobile } from "./MenuMobile";
 import exploreradmin from "../../assets/icons/explorer_admin.svg";
@@ -11,6 +12,7 @@ interface HeaderMobileProps {
 }
 
 export function HeaderMobile({ is_admin }: HeaderMobileProps) {
+  const { pedidos } = useUser();
   const [menu, setMenu] = useState<boolean>(false);
 
   function handleOpenModal() {
@@ -31,9 +33,16 @@ export function HeaderMobile({ is_admin }: HeaderMobileProps) {
                 className="w-52 h-full"
               />
             </Link>
-            <Link to={"/payment"}>
-              <img src={receipt} />
-            </Link>
+            {!!is_admin ? null : (
+              <div className="relative">
+                <Link to={"/payment"}>
+                  <img className="relative" src={receipt} />
+                  <button className="text-white text-sm bg-[#750310] px-[1px] rounded-full w-5 h-5 absolute -top-1 left-4">
+                    {pedidos.length}
+                  </button>
+                </Link>
+              </div>
+            )}
           </>
         )}
       </section>

@@ -11,11 +11,11 @@ export function AdminButton({ text, url, icon = "false" }: ButtonProps) {
   return (
     <>
       <Link to={`/${url}`}>
-        <button className="relative w-52 h-12 text-center text-sm font-medium bg-[#750310] rounded">
+        <button className="relative w-44 lg:w-36 xl:w-44 h-12 text-center text-sm font-medium bg-[#750310] rounded">
           {text}
           <img
             src={receipt}
-            className="w-7 h-7 absolute top-2.5 left-7"
+            className="w-7 h-7 absolute top-2.5 left-4 lg:left-2 xl:left-4"
             style={{ display: icon === "true" ? "block" : "none" }}
           />
         </button>

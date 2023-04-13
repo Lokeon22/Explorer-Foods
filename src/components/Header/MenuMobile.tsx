@@ -24,6 +24,7 @@ export function MenuMobile({ setMenu }: MenuMobileProps) {
       return;
     }
     navigate(`/search/${search}`);
+    handleCloseModal();
   }
 
   return (
@@ -46,13 +47,14 @@ export function MenuMobile({ setMenu }: MenuMobileProps) {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      {!!user?.user.is_admin && (
-        <Link to={"/createdish"}>
-          <h2 className="text-2xl font-light font-Poppins text-[#E1E1E6] mb-2">
-            Novo prato
-          </h2>
-        </Link>
-      )}
+      <Link
+        onClick={handleCloseModal}
+        to={!!user?.user.is_admin ? "createdish" : "favorites"}
+      >
+        <h2 className="text-2xl font-light font-Poppins text-[#E1E1E6] mb-4">
+          {!!user?.user.is_admin ? "Novo prato" : "Meus favoritos"}
+        </h2>
+      </Link>
       <Link to={"/"} onClick={handleLogout}>
         <h2 className="text-2xl font-light font-Poppins text-[#E1E1E6]">
           Sair

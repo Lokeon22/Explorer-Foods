@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { api } from "../services/api";
-import { UserProps, PedidosProps } from "../models/@types";
+import { UserProps, PedidosProps, FavoritesProps } from "../models/@types";
 
 interface UserProviderProps {
   children: React.ReactNode;
@@ -13,6 +13,8 @@ interface UserContextProps {
   handleLogout: () => void;
   pedidos: PedidosProps[];
   setPedidos: React.Dispatch<React.SetStateAction<PedidosProps[]>>;
+  favorites: FavoritesProps[];
+  setFavorites: React.Dispatch<React.SetStateAction<FavoritesProps[]>>;
 }
 
 const UserContext = createContext({} as UserContextProps);
@@ -20,6 +22,7 @@ const UserContext = createContext({} as UserContextProps);
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<UserProps | undefined>();
   const [pedidos, setPedidos] = useState<PedidosProps[]>([]);
+  const [favorites, setFavorites] = useState<FavoritesProps[]>([]);
 
   async function handleLogin(email: string, password: string) {
     await api
@@ -59,7 +62,16 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, handleLogin, handleLogout, pedidos, setPedidos }}
+      value={{
+        user,
+        setUser,
+        handleLogin,
+        handleLogout,
+        pedidos,
+        setPedidos,
+        favorites,
+        setFavorites,
+      }}
     >
       {children}
     </UserContext.Provider>

@@ -21,6 +21,7 @@ export function DishPedidos({
         <img
           src={`${api.defaults.baseURL}/files/${pedido.image}`}
           className="max-w-[72px] md:w-[72px]"
+          alt={pedido.image}
         />
       </div>
       <div>

@@ -5,6 +5,7 @@ import { CreateDish } from "../pages/CreateDish";
 import { EditDish } from "../pages/EditDish";
 import { Payment } from "../pages/Payment";
 import { Search } from "../pages/Search";
+import { Favorites } from "../pages/Favorites";
 
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
@@ -21,6 +22,7 @@ export function AppRoutes() {
         <Route path="/editdish/:id" element={<EditDish />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/search/:name" element={<Search />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
