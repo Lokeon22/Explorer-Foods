@@ -80,7 +80,7 @@ export function ButtonDishes({ data, dishPrice }: ButtonDishesProps) {
       <button
         ref={botao}
         type="submit"
-        className="bg-[#750310] px-4 py-2 rounded font-Poppins hover:bg-[#7c000d] hover:duration-300 w-4/5 sm:w-auto"
+        className="bg-[#750310] px-4 py-2 rounded font-Poppins hover:bg-[#92000E] duration-200 ease-in w-4/5 sm:w-auto"
       >
         incluir {dishPrice && `R$ ${dishPrice}`}
       </button>

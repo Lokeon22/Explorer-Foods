@@ -52,16 +52,18 @@ export function EditDish() {
   });
 
   async function deleteDish() {
-    const res = await api.delete(`/remove/${id}`);
-    return res.data;
-  }
-
-  const { mutate: delDish } = useMutation(["deleteDish"], deleteDish, {
-    onSuccess: () => {
+    const confirmDel = confirm("Deseja deletar o prato?");
+    if (confirmDel) {
+      const res = await api.delete(`/remove/${id}`);
       alert("Prato deletado");
       navigate("/");
-    },
-  });
+      return res.data;
+    } else {
+      return;
+    }
+  }
+
+  const { mutate: delDish } = useMutation(["deleteDish"], deleteDish);
 
   if (isLoading) {
     return <h2>Carregando...</h2>;

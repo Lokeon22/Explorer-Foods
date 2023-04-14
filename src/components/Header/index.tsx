@@ -7,6 +7,7 @@ import explorer from "../../assets/icons/explorer.svg";
 import exploreradmin from "../../assets/icons/explorer_admin.svg";
 import logout from "../../assets/icons/SignOut.svg";
 import searchicon from "../../assets/icons/search.svg";
+
 import { HeaderMobile } from "./HeaderMobile";
 import { AdminButton } from "../AdminContent/AdminButton";
 
@@ -53,7 +54,7 @@ export const Header = () => {
           ) : (
             <>
               <Link to={"/favorites"}>
-                <h2 className="text-center text-xs xl:text-sm">
+                <h2 className="text-center text-xs xl:text-sm hover:text-[#E1E1E6] duration-200">
                   Meus favoritos
                 </h2>
               </Link>

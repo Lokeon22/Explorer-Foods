@@ -16,13 +16,13 @@ export function AppRoutes() {
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/details/:id" element={<Details />} />
-        <Route path="/createdish" element={<CreateDish />} />
-        <Route path="/editdish/:id" element={<EditDish />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/search/:name" element={<Search />} />
-        <Route path="/favorites" element={<Favorites />} />
+        <Route path="" element={<Home />} />
+        <Route path="details/:id" element={<Details />} />
+        <Route path="createdish" element={<CreateDish />} />
+        <Route path="editdish/:id" element={<EditDish />} />
+        <Route path="payment" element={<Payment />} />
+        <Route path="search/:name" element={<Search />} />
+        <Route path="favorites" element={<Favorites />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
