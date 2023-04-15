@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../../services/api";
 import { useUser } from "../../context/useUser";
-import { FavoritesProps } from "../../models/@types";
+import { useFavorites } from "../../context/useFavorites";
 
 import { ButtonDishes } from "../ButtonDishes";
 import heart from "../../assets/icons/HeartStraight.svg";
@@ -20,22 +19,10 @@ interface DishesProps {
 }
 
 export function Dishes({ data }: DishesProps) {
-  const { user, favorites, setFavorites } = useUser();
+  const { user } = useUser();
+  const { favorites, addFavorites, removeFavorites } = useFavorites();
 
   const isFavorites = favorites.some((fav) => fav.id === data.id);
-
-  function handleAddFavorites(data: FavoritesProps) {
-    setFavorites([...favorites, data]);
-  }
-
-  function handleRemoveFavorites(id: number) {
-    const filtered = favorites.filter((fav) => fav.id !== id);
-    setFavorites(filtered);
-  }
-
-  useEffect(() => {
-    localStorage.setItem("@foods:fav", JSON.stringify(favorites));
-  }, [favorites]);
 
   return (
     <>
@@ -50,9 +37,7 @@ export function Dishes({ data }: DishesProps) {
       ) : (
         <img
           onClick={() =>
-            isFavorites
-              ? handleRemoveFavorites(data.id)
-              : handleAddFavorites(data)
+            isFavorites ? removeFavorites(data.id) : addFavorites(data)
           }
           src={isFavorites ? redheart : heart}
           alt="icon coração"

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { api } from "../services/api";
-import { UserProps, PedidosProps, FavoritesProps } from "../models/@types";
+import { UserProps, PedidosProps } from "../models/@types";
 
 interface UserProviderProps {
   children: React.ReactNode;
@@ -13,8 +13,6 @@ interface UserContextProps {
   handleLogout: () => void;
   pedidos: PedidosProps[];
   setPedidos: React.Dispatch<React.SetStateAction<PedidosProps[]>>;
-  favorites: FavoritesProps[];
-  setFavorites: React.Dispatch<React.SetStateAction<FavoritesProps[]>>;
 }
 
 const UserContext = createContext({} as UserContextProps);
@@ -22,9 +20,6 @@ const UserContext = createContext({} as UserContextProps);
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<UserProps | undefined>();
   const [pedidos, setPedidos] = useState<PedidosProps[]>([]);
-  const [favorites, setFavorites] = useState<FavoritesProps[]>(
-    JSON.parse(`${localStorage.getItem("@foods:fav")}`)
-  );
 
   async function handleLogin(email: string, password: string) {
     return await api
@@ -47,7 +42,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     localStorage.removeItem("@foods:user");
     localStorage.removeItem("@foods:token");
     setUser(undefined);
-    setFavorites([]);
   }
 
   useEffect(() => {
@@ -72,8 +66,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         handleLogout,
         pedidos,
         setPedidos,
-        favorites,
-        setFavorites,
       }}
     >
       {children}

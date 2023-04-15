@@ -1,10 +1,10 @@
-import { useUser } from "../context/useUser";
+import { useFavorites } from "../context/useFavorites";
 import { api } from "../services/api";
 
 import { Back } from "../components/Back";
 
 export function Favorites() {
-  const { favorites } = useUser();
+  const { favorites } = useFavorites();
 
   return (
     <main className="max-w-[1280px] min-h-screen mx-auto my-0 text-white px-2">
