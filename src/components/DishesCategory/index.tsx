@@ -1,10 +1,10 @@
 import { useRef } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { api } from "../../services/api";
+import { useFetchData } from "../../hooks/useFetchData";
 
 import { Dishes } from "../Dishes";
 import { DishProps } from "../../models/@types";
 import { Loading } from "../Helper/Loading";
+import { Error } from "../Helper/Error";
 
 import { Carouselleft } from "../Carousel/CarouselLeft";
 import { Carouselright } from "../Carousel/CarouselRight";
@@ -16,22 +16,19 @@ interface DishCategory {
 export function DishesCategory({ category }: DishCategory) {
   const carousel = useRef<HTMLDivElement | null>(null);
 
-  async function getDishes() {
-    const response = await api.get<DishProps[]>(`/dishes/${category}`);
-    return response.data;
-  }
-
-  const { data, isLoading, isError } = useQuery(
-    ["getDishes", category],
-    getDishes
-  );
+  const { data, isLoading, isError } = useFetchData<DishProps[]>({
+    url: "dishes",
+    parameter: category,
+    key: "getDishes",
+    keyRefresh: category,
+  });
 
   if (isLoading) {
     return <Loading text="Carregando cardápio..." />;
   }
 
   if (isError) {
-    return <h2>Não consegui encontrar, por favor tente mais tarde</h2>;
+    return <Error text="Ocorreu algum error, tente novamente mais tarde" />;
   }
 
   return (

@@ -1,6 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { api } from "../services/api";
+import { useFetchData } from "../hooks/useFetchData";
+
+import { Error } from "../components/Helper/Error";
+
 import { Back } from "../components/Back";
 import { DishProps } from "../models/@types";
 import { DishDetail } from "../components/Dishes/DishDetails";
@@ -8,18 +10,13 @@ import { DishDetail } from "../components/Dishes/DishDetails";
 export function Search() {
   const { name } = useParams();
 
-  async function getSearchItem() {
-    const response = await api.get<DishProps[]>(`/alldishes`);
-    return response.data;
-  }
-
-  const { data, isLoading, isError } = useQuery(
-    ["getSearchItem"],
-    getSearchItem
-  );
+  const { data, isLoading, isError } = useFetchData<DishProps[]>({
+    url: "alldishes",
+    key: "getSearchDish",
+  });
 
   if (isError) {
-    return <h2>Desculpe, ocorreu um erro</h2>;
+    return <Error text="Desculpe, ocorreu algum error" />;
   }
 
   return (

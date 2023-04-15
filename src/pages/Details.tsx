@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
-import { api } from "../services/api";
-import { useQuery } from "@tanstack/react-query";
+import { useFetchData } from "../hooks/useFetchData";
+
+import { Loading } from "../components/Helper/Loading";
+import { Error } from "../components/Helper/Error";
 
 import { DishProps } from "../models/@types";
 import { DishDetail } from "../components/Dishes/DishDetails";
@@ -9,15 +11,18 @@ import { Back } from "../components/Back";
 export function Details() {
   const { id } = useParams();
 
-  async function getDishDetails() {
-    const response = await api.get<DishProps>(`/dish/${id}`);
-    return response.data;
-  }
-
-  const { data, isLoading } = useQuery(["getDishDetails"], getDishDetails);
+  const { data, isLoading, isError } = useFetchData<DishProps>({
+    url: "dish",
+    parameter: id,
+    key: "getDetail",
+  });
 
   if (isLoading) {
-    return <h2>Carregando...</h2>;
+    <Loading text="Carregando..." />;
+  }
+
+  if (isError) {
+    <Error text="Ocorreu algum erro, tente novamente" />;
   }
 
   return (
