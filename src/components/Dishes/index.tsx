@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../../services/api";
 import { useUser } from "../../context/useUser";
@@ -31,6 +32,10 @@ export function Dishes({ data }: DishesProps) {
     const filtered = favorites.filter((fav) => fav.id !== id);
     setFavorites(filtered);
   }
+
+  useEffect(() => {
+    localStorage.setItem("@foods:fav", JSON.stringify(favorites));
+  }, [favorites]);
 
   return (
     <>

@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { api } from "../../services/api";
 import { Link, useNavigate } from "react-router-dom";
-import { AxiosError } from "axios";
 
 import { Title } from "../Title";
 import { Input } from "../Input";
@@ -15,17 +15,18 @@ export function UserRegister() {
   const navigate = useNavigate();
 
   async function createUser(name: string, email: string, password: string) {
-    await api
-      .post("/create", { name, email, password })
-      .then((res) => {
-        alert("Usuario cadastrado");
-        navigate("/");
-      })
-      .catch((error: AxiosError) => {
-        if (error.response?.status === 500) {
-          alert("Esse email já está em uso");
-        }
-      });
+    if (password.length < 6) return alert("Senha no mínimo 6 caracteres");
+    await api.post("/create", { name, email, password });
+    alert("Usuário cadastrado");
+    return navigate("/");
+  }
+
+  const { mutate, isLoading, isError } = useMutation(["createUser"], () =>
+    createUser(name, email, password)
+  );
+
+  if (isError) {
+    return <h2>Algo deu errado... Tente mais tarde</h2>;
   }
 
   return (
@@ -34,7 +35,7 @@ export function UserRegister() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          createUser(name, email, password);
+          mutate();
         }}
       >
         <Label text="Seu nome" id="name" />
@@ -43,7 +44,7 @@ export function UserRegister() {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Exemplo: Maria da Silva"
+          placeholder="Exemplo: Joaquim Barbosa"
           name="name"
           border="null"
         />
@@ -67,7 +68,7 @@ export function UserRegister() {
           name="password"
           border="null"
         />
-        <Button text="Criar conta" />
+        <Button text="Criar conta" isLoading={isLoading} />
         <div className="text-center font-medium font-Poppins text-sm sm:text-base">
           <Link to={"/"}>Já tenho uma conta</Link>
         </div>

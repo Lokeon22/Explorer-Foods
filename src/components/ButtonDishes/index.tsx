@@ -26,6 +26,7 @@ export function ButtonDishes({ data, dishPrice }: ButtonDishesProps) {
   const [cart, setCart] = useState<PedidosProps[]>([]);
 
   function addAmountCart() {
+    if (amount >= 20) return alert("Número máximo de pratos");
     setAmount(amount + 1);
     setCart([...cart, data]);
   }
@@ -55,7 +56,7 @@ export function ButtonDishes({ data, dishPrice }: ButtonDishesProps) {
         adicionarCarrinho(botao);
         notify();
       }}
-      className="w-full flex flex-col sm:flex-row sm:flex-wrap items-center gap-4"
+      className="w-full flex flex-col md:flex-row sm:flex-wrap items-center gap-4"
       style={{ justifyContent: dishPrice ? "start" : "center" }}
     >
       <div className="flex items-center gap-3">
@@ -71,7 +72,7 @@ export function ButtonDishes({ data, dishPrice }: ButtonDishesProps) {
           <img src={minus} className="w-6 h-6" />
         </button>
         <button className="font-Roboto font-semibold text-lg bg-transparent">
-          {amount}
+          {amount < 10 ? <span>0{amount}</span> : amount}
         </button>
         <button type="button" onClick={addAmountCart}>
           <img src={plus} className="w-6 h-6" />
@@ -80,9 +81,9 @@ export function ButtonDishes({ data, dishPrice }: ButtonDishesProps) {
       <button
         ref={botao}
         type="submit"
-        className="bg-[#750310] px-4 py-2 rounded font-Poppins hover:bg-[#92000E] duration-200 ease-in w-4/5 sm:w-auto"
+        className="bg-[#750310] px-4 py-2 rounded font-Poppins hover:bg-[#92000E] duration-200 ease-in w-4/5 md:w-auto"
       >
-        incluir {dishPrice && `R$ ${dishPrice}`}
+        incluir {dishPrice && `• R$ ${dishPrice}`}
       </button>
       <Toastify />
     </form>

@@ -22,10 +22,12 @@ const UserContext = createContext({} as UserContextProps);
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<UserProps | undefined>();
   const [pedidos, setPedidos] = useState<PedidosProps[]>([]);
-  const [favorites, setFavorites] = useState<FavoritesProps[]>([]);
+  const [favorites, setFavorites] = useState<FavoritesProps[]>(
+    JSON.parse(`${localStorage.getItem("@foods:fav")}`)
+  );
 
   async function handleLogin(email: string, password: string) {
-    await api
+    return await api
       .post<UserProps>("/login", { email, password })
       .then((res) => setUser(res.data))
       .catch((error) => {
@@ -45,6 +47,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     localStorage.removeItem("@foods:user");
     localStorage.removeItem("@foods:token");
     setUser(undefined);
+    setFavorites([]);
   }
 
   useEffect(() => {
