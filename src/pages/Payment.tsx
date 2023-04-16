@@ -28,7 +28,7 @@ export function Payment() {
 
   return (
     <>
-      <main className="max-w-[1280px] min-h-screen mx-auto my-0 text-white px-2">
+      <main className="animate-changeOpDire max-w-[1280px] min-h-screen mx-auto my-0 text-white px-2">
         <Back />
         <section className="w-full grid gap-4 md:gap-0 grid-cols-1 sm:grid-cols-6 mx-auto my-0 px-3 py-3 xl:px-0 xl:py-0 font-Poppins font-medium mt-5 md:mt-10">
           <div className="my-0 mx-0 sm:col-span-3">

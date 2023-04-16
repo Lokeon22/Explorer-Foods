@@ -1,6 +1,6 @@
 import { useUser } from "../../context/useUser";
-import { api } from "../../services/api";
 import { DishProps } from "../../models/@types";
+import { ImageSkeleton } from "../ImageSkeleton";
 
 import { ButtonDishes } from "../ButtonDishes";
 import { AdminButton } from "../AdminContent/AdminButton";
@@ -19,11 +19,10 @@ export function DishDetail({ dish, margin, imageSize }: DishDetailProps) {
       className="flex flex-col md:flex-row items-center gap-6 md:gap-5 lg:gap-12"
       style={{ marginBottom: margin ? "50px" : "0px" }}
     >
-      <img
-        className="h-full"
-        style={{ width: imageSize === "small" ? "300px" : "384px" }}
-        src={`${api.defaults.baseURL}/files/${dish.image}`}
-        alt={dish.name}
+      <ImageSkeleton
+        image={dish.image}
+        name={dish.name}
+        imageSize={imageSize}
       />
       <div className="text-[#E1E1E6] font-Poppins flex text-center md:text-start flex-col gap-4 lg:gap-6">
         <h2 className="text-[27px] lg:text-4xl font-medium">{dish.name}</h2>

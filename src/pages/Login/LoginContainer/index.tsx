@@ -1,12 +1,12 @@
-import explorer from "../assets/icons/explorer.svg";
+import explorer from "../../../assets/icons/explorer.svg";
 
-interface LoginRegisterProps {
+interface LoginContainerProps {
   children: React.ReactNode;
 }
 
-export const LoginRegister = ({ children }: LoginRegisterProps) => {
+export const LoginContainer = ({ children }: LoginContainerProps) => {
   return (
-    <main className="w-full h-screen flex justify-center items-center text-white">
+    <main className="w-full h-screen flex justify-center items-center text-white animate-changeOpacity">
       <section className="grid grid-cols-1 px-2 sm:grid-cols-2 gap-2 md:gap-5">
         <div className="flex justify-center items-center mb-2 md:mb-16">
           <img src={explorer} className="w-4/5 h-full sm:w-80 sm:h-12" />

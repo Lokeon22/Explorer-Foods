@@ -9,7 +9,7 @@ interface ButtonProps {
 
 export function AdminButton({ text, url, icon = "false" }: ButtonProps) {
   return (
-    <>
+    <div>
       <Link to={`/${url}`}>
         <button className="relative w-44 lg:w-36 xl:w-44 h-12 text-center text-sm font-medium bg-[#750310] rounded duration-200 hover:bg-[#83010e]">
           {text}
@@ -20,6 +20,6 @@ export function AdminButton({ text, url, icon = "false" }: ButtonProps) {
           />
         </button>
       </Link>
-    </>
+    </div>
   );
 }

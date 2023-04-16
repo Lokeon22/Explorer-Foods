@@ -7,7 +7,7 @@ export function Favorites() {
   const { favorites } = useFavorites();
 
   return (
-    <main className="max-w-[1280px] min-h-screen mx-auto my-0 text-white px-2">
+    <main className="max-w-[1280px] min-h-screen mx-auto my-0 text-white px-2 animate-changeOpacity">
       <Back />
       <h2 className="text-xl mb-8 text-[#E1E1E6]">Meus Favoritos</h2>
       <section className="flex flex-col md:flex-row flex-wrap gap-12 md:gap-6 lg:gap-12 w-full mx-auto my-0 px-3 py-3 xl:px-0 xl:py-0 font-Poppins font-medium">

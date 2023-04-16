@@ -48,7 +48,7 @@ export function Dishes({ data }: DishesProps) {
         <img
           src={`${api.defaults.baseURL}/files/${data.image}`}
           className="w-32 h-32 sm:w-44 sm:h-44 object-cover hover:opacity-75 hover:duration-300"
-          alt={data.image}
+          alt={data.name}
         />
       </Link>
       <h2 className="text-lg sm:text-2xl text-center font-Poppins font-medium sm:mt-4 mt-3 mb-1 sm:mb-2 text-[#E1E1E6]">

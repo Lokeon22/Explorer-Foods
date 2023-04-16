@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useUser } from "../../context/useUser";
+import { useUser } from "../../../context/useUser";
 import { Link } from "react-router-dom";
 
-import { Title } from "../Title";
-import { Label } from "../Label";
-import { Input } from "../Input";
-import { Button } from "../Button";
+import { Title } from "../../../components/Title";
+import { Label } from "../../../components/Label";
+import { Input } from "../../../components/Input";
+import { Button } from "../../../components/Button";
 
 export function UserLogin() {
   const [email, setEmail] = useState<string>("");
@@ -14,7 +14,7 @@ export function UserLogin() {
   const { handleLogin } = useUser();
 
   return (
-    <>
+    <main className="animate-changeOpDire">
       <Title text="Faça login" />
       <form
         onSubmit={(e) => {
@@ -47,6 +47,6 @@ export function UserLogin() {
           <Link to={"/register"}>Criar uma conta</Link>
         </div>
       </form>
-    </>
+    </main>
   );
 }

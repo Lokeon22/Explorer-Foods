@@ -46,11 +46,15 @@ export function FreteValor({ valorTotal, simulateFrete }: FreteValorProps) {
   );
 
   if (isError) {
-    return <h2>Desculpe não encontrei seu cep, tente mais tarde...</h2>;
+    return (
+      <h2 className="my-3">
+        Desculpe não encontrei seu cep, tente mais tarde...
+      </h2>
+    );
   }
 
   if (isLoading) {
-    return <h2>Carregando...</h2>;
+    return <h2 className="my-3">Carregando...</h2>;
   }
 
   return (

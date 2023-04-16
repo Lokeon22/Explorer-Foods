@@ -50,7 +50,7 @@ export function CreateDish() {
   );
 
   return (
-    <main className="max-w-[1280px] min-h-screen mx-auto my-0 text-white px-2">
+    <main className="max-w-[1280px] min-h-screen mx-auto my-0 text-white px-2 animate-changeOpDire">
       <Back />
       <section className="w-full mx-auto my-0 px-3 py-3 xl:px-0 xl:py-0 font-Poppins font-medium">
         <h2 className="text-3xl mb-8">Adicionar prato</h2>

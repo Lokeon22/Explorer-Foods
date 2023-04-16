@@ -8,11 +8,21 @@ export default {
     extend: {
       animation: {
         modifyScale: "modifyScale 0.7s ease-in-out",
+        changeOpacity: "changeOpacity 0.7s ease-in-out",
+        changeOpDire: "changeOpDire 0.7s ease",
       },
       keyframes: {
         modifyScale: {
           "0, 100%": { transform: "scale(1)" },
           "50%": { transform: "scale(0.9)" },
+        },
+        changeOpacity: {
+          "100%": { opacity: "1" },
+          "0%": { opacity: "0" },
+        },
+        changeOpDire: {
+          "100%": { opacity: "1", transform: "translateX(0px)" },
+          "0%": { opacity: "0", transform: "translateX(-50px)" },
         },
       },
       fontFamily: {

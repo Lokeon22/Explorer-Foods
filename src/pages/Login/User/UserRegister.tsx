@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { api } from "../../services/api";
+import { api } from "../../../services/api";
 import { Link, useNavigate } from "react-router-dom";
 
-import { Title } from "../Title";
-import { Input } from "../Input";
-import { Label } from "../Label";
-import { Button } from "../Button";
+import { Title } from "../../../components/Title";
+import { Input } from "../../../components/Input";
+import { Label } from "../../../components/Label";
+import { Button } from "../../../components/Button";
 
 export function UserRegister() {
   const [name, setName] = useState<string>("");
@@ -30,7 +30,7 @@ export function UserRegister() {
   }
 
   return (
-    <>
+    <main className="animate-changeOpDire">
       <Title text="Crie sua Conta" />
       <form
         onSubmit={(e) => {
@@ -73,6 +73,6 @@ export function UserRegister() {
           <Link to={"/"}>Já tenho uma conta</Link>
         </div>
       </form>
-    </>
+    </main>
   );
 }

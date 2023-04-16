@@ -2,6 +2,7 @@ import { useState } from "react";
 import { UseMutateFunction } from "@tanstack/react-query";
 import { CreateDishProps } from "../../pages/CreateDish";
 
+import { Error } from "../Helper/Error";
 import { Label } from "../Label";
 import { IngredientsItem } from "../IngredientsItem";
 import upload from "../../assets/icons/upload.svg";
@@ -44,7 +45,7 @@ export function AdminModifyDish({
 
   if (isError) {
     return (
-      <h2>Não foi possível adicionar o prato, por favor tente mais tarde</h2>
+      <Error text="Não foi possível adicionar o prato, por favor tente mais tarde" />
     );
   }
 
@@ -159,7 +160,7 @@ export function AdminModifyDish({
           </button>
           <button
             type="submit"
-            className="w-full md:w-52 h-12 text-center text-sm font-medium bg-[#AB4D55] rounded mt-8"
+            className="w-full md:w-52 h-12 text-center text-sm font-medium bg-[#AB4D55] hover:bg-[#863b40] duration-500 rounded mt-8"
           >
             Salvar alterações
           </button>

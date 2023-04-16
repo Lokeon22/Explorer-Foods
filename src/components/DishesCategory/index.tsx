@@ -35,7 +35,7 @@ export function DishesCategory({ category }: DishCategory) {
     <div className="w-full flex flex-row items-center gap-7 mt-0 mb-16">
       <Carouselleft carousel={carousel} />
       <div
-        className="carousel flex flex-nowrap overflow-x-auto md:scrollbar-hide scrollbar-default scroll-smooth"
+        className="animate-changeOpacity carousel flex flex-nowrap overflow-x-auto md:scrollbar-hide scrollbar-default scroll-smooth"
         ref={carousel}
       >
         {data &&
