@@ -16,18 +16,22 @@ export function UserRegister() {
 
   async function createUser(name: string, email: string, password: string) {
     if (password.length < 6) return alert("Senha no mínimo 6 caracteres");
-    await api.post("/create", { name, email, password });
-    alert("Usuário cadastrado");
-    return navigate("/");
+    await api
+      .post("/create", { name, email, password })
+      .then((res) => {
+        alert("Usuario cadastrado");
+        return navigate("/");
+      })
+      .catch((e) => {
+        if (e.response.status === 500) {
+          return alert("Email já existe");
+        }
+      });
   }
 
-  const { mutate, isLoading, isError } = useMutation(["createUser"], () =>
+  const { mutate, isLoading } = useMutation(["createUser"], () =>
     createUser(name, email, password)
   );
-
-  if (isError) {
-    return <h2>Algo deu errado... Tente mais tarde</h2>;
-  }
 
   return (
     <main className="animate-changeOpDire">
