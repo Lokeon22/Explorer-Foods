@@ -12,7 +12,9 @@ Já o user_admin é responsável por toda a parte de adicionar os pratos, ingred
 
 ✔️ Acesse o site clicando [aqui](https://explorerfoods.netlify.app/)
 
-`💡 Obs: Pela aplicação estar hospedada em um servidor gratuito, após 15 minutos de inatividade o servidor "hiberna". Ao tentar acessar a aplicação, favor aguardar aproximadamente 1 minuto pois ele irá iniciar o servidor novamente. `
+```bash
+💡 Obs: Devido a aplicação estar hospedada em um serviço gratuito, após 15 minutos de inatividade o servidor "hiberna". Ao tentar acessar a aplicação, favor aguardar aproximadamente 1 minuto pois ele irá iniciar o servidor novamente.
+```
 
 ## 🧾 Tecnologias
 
