@@ -6,7 +6,7 @@ Essa aplicação simula um site de restaurante, temos o admin gerenciando todo o
 
 Front-end do Desafio Final do programa [Explorer Rocketseat](https://www.rocketseat.com.br/explorer).
 
-O usuário pode criar sua conta, visualizar os pratos, adicioná-los como favoritos e fazer pedidos.
+O usuário pode criar sua conta, pesquisar por pratos específicos, visualizar, adicioná-los como favoritos e fazer pedidos.
 
 Já o user_admin é responsável por toda a parte de adicionar os pratos, ingredientes, atualizar pedidos, etc.
 
